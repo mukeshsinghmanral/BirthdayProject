@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday ❤️</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #fff;
+      text-align: center;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 22px;
+      padding: 35px 30px;
+      max-width: 520px;
+      box-shadow: 0 25px 45px rgba(0,0,0,0.25);
+      animation: fadeIn 2s ease;
+    }
+    .photo-frame {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      padding: 6px;
+      background: linear-gradient(135deg, #ff6f91, #ffc3a0);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.8);
+    }
+    h1 { font-size: 2.4rem; margin-bottom: 12px; }
+    h2 { font-size: 1.4rem; margin-bottom: 18px; font-weight: 400; }
+    p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px; }
+    .heart { font-size: 3rem; animation: pulse 1.5s infinite; }
+    .date { margin-top: 15px; font-size: 1rem; opacity: 0.9; }
+    @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.2)} 100%{transform:scale(1)} }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    .floating-heart { position:absolute; bottom:-20px; color:rgba(255,255,255,0.8); animation:floatUp linear infinite; }
+    @keyframes floatUp { from{transform:translateY(0);opacity:1} to{transform:translateY(-110vh);opacity:0} }
+  </style>
+</head>
+<body>
+
+  <!-- Surprise Opening Page -->
+  <div class="card" id="intro">
+    <div class="heart">❤️</div>
+    <h1>Hey My Love…</h1>
+    <p>
+      Before you go ahead,
+      please <b>click "I love you" 5 times</b> 💖<br/>(Each click brings you closer ✨)</p>
+    <p id="counterText">Remaining: 5</p>
+    <button id="loveBtn" style="
+      margin-top:15px;
+      padding:12px 30px;
+      border:none;
+      border-radius:25px;
+      background:#ff6f91;
+      color:white;
+      font-size:1.1rem;
+      cursor:pointer;
+      box-shadow:0 10px 20px rgba(0,0,0,0.2);
+    ">I Love You ❤️</button></p>
+    
+  </div>
+
+  <!-- Birthday Page -->
+  <div class="card" id="birthday" style="display:none;">
+    <div class="photo-frame">
+      <img src="20251220_125824.jpg" alt="Us Together" />
+    </div>
+    <div class="heart">❤️</div>
+    <h1>Happy Birthday, Sonali ❤️</h1>
+    <h2>To the most beautiful soul in my life</h2>
+    <p>
+      On your special day, I just want you to know how incredibly lucky I am to have you.
+      Your smile lights up my world, and your presence makes everything better.
+      May this year bring you happiness, success, and endless love.
+    </p>
+    <p>
+      Thank you for being you — kind, strong, and amazing. I promise to always stand by you.
+    </p>
+    <div class="date">3rd February 🎂</div>
+  </div>
+
+  <script>
+    let loveCount = 0;
+    const total = 5;
+    const btn = document.getElementById('loveBtn');
+
+    btn.addEventListener('click', () => {
+      loveCount++;
+      btn.style.transform = 'scale(1.15)';
+      setTimeout(() => btn.style.transform = 'scale(1)', 150);
+
+      const remaining = total - loveCount;
+      if (remaining > 0) {
+        document.getElementById('counterText').innerText = `Remaining: ${remaining}`;
+      } else {
+        document.getElementById('intro').style.display = 'none';
+        document.getElementById('birthday').style.display = 'block';
+      }
+    });
+
+    // create floating hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+      heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+    setInterval(createHeart, 500);
+  </script>
+
+</body>
+</html>
